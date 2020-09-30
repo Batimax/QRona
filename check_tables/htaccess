@@ -1,0 +1,5 @@
+/srv/http/QRona/check_tables/.htaccess
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "/srv/http/QRona/check_tables/.htpasswd"
+Require valid-user

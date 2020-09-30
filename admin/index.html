@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" charset="utf-8" content="initial-scale=1" ; />
+		<meta name="author" content="Batimax" />
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+			crossorigin="anonymous"
+		/>
+
+		<title>Satellite - QRona admin</title>
+
+		<style>
+			.footer,
+			.header {
+				bottom: 0;
+				background-color: #181818;
+			}
+			.no_colapse {
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Header -->
+		<header class="header shadow mb-2 p-2">
+			<div class="container flex-md-nowrap">
+				<img
+					src="../static/logos/long_trans_blanc.png"
+					height="45"
+					class="d-inline-block align-top"
+					alt=""
+				/>
+			</div>
+		</header>
+
+		<!-- Modal Delete User-->
+		<div class="container">
+			<div
+				class="modal fade"
+				id="modal_delete_user"
+				data-backdrop="static"
+				data-keyboard="false"
+				tabindex="-1"
+				aria-labelledby="staticBackdropLabel"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">
+								DELETE USER?
+							</h5>
+							<button
+								type="button"
+								class="close"
+								data-dismiss="modal"
+								aria-label="Close"
+							>
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body col-md text-justify">
+							<p id="msg_delete_user"></p>
+						</div>
+						<div class="modal-footer">
+							<button
+								id="btn_deny_delete_user"
+								type="button"
+								class="btn btn-secondary"
+								data-dismiss="modal"
+							>
+								NON
+							</button>
+							<button
+								id="btn_accept_delete_user"
+								type="button"
+								class="btn btn-danger"
+							>
+								OUI
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal User Deleted-->
+		<div class="container">
+			<div
+				class="modal fade"
+				id="modal_user_deleted"
+				data-backdrop="static"
+				data-keyboard="false"
+				tabindex="-1"
+				aria-labelledby="staticBackdropLabel"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-body col-md text-justify">
+							<h3>User successfully deleted</h3>
+						</div>
+						<div class="modal-footer">
+							<button
+								id="modal_user_deleted_ok"
+								type="button"
+								class="btn btn-secondary"
+							>
+								Ok
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Research form -->
+		<div class="container col-md-10">
+			<form role="form" id="form_names">
+				<div class="row">
+					<!-- first col -->
+					<div class="col-md-4">
+						<div class="col">
+							<label for="selected_name">Nom Prénom</label>
+							<input
+								class="form-control"
+								type="text"
+								id="selected_name"
+								list="list_name"
+								placeholder="Nom Prénom"
+							/>
+							<datalist type="text" id="list_name" required>
+							</datalist>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<label for="selected_hour">Heures</label>
+								<select
+									class="form-control-sm"
+									id="selected_hour"
+								>
+									<option>2</option>
+									<option>4</option>
+									<option>6</option>
+									<option>8</option>
+									<option>12</option>
+									<option>24</option>
+								</select>
+							</div>
+
+							<div class="col">
+								<label for="selected_table">Table</label>
+								<select
+									class="form-control-sm"
+									id="selected_table"
+								></select>
+							</div>
+
+							<div class="col">
+								<label for="selected_days_ago">Days</label>
+								<select
+									class="form-control-sm"
+									id="selected_days_ago"
+								>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+									<option>13</option>
+									<option>14</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<!-- 2nd col (buttons) -->
+					<div class="col-md-3">
+						<div class="row justify-content-center">
+							<div class="col mt-3">
+								<button
+									id="btn_submit_names"
+									type="submit"
+									class="btn btn-primary"
+								>
+									Submit détails
+								</button>
+							</div>
+
+							<div class="col mt-3">
+								<button
+									id="btn_delete_account"
+									type="submit"
+									class="btn btn-danger"
+								>
+									Supprimer compte
+								</button>
+							</div>
+						</div>
+
+						<div class="row mt-2 justify-content-center">
+							<div class="col my-auto">
+								<button
+									id="btn_submit_unique_names"
+									type="submit"
+									class="btn btn-primary"
+								>
+									Submit
+								</button>
+							</div>
+
+							<div class="col mt-2 my-auto">
+								<button
+									id="btn_get_user_data"
+									type="submit"
+									class="btn btn-warning"
+								>
+									User data
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- 3rd col (buttons) -->
+					<div class="col container offset-1">
+						<div class="row mb-1">
+							<div class="col mt-3 d-flex justify-content-center">
+								<button
+									id="btn_submit_daily_info"
+									type="submit"
+									class="btn btn-primary"
+								>
+									Show daily data
+								</button>
+							</div>
+						</div>
+						<div
+							class="col d-flex justify-content-center align-items-center pt-2"
+						>
+							<label for="selected_daily_info_days"
+								>Days ago</label
+							>
+							<select
+								class="form-control-sm ml-1"
+								id="selected_daily_info_days"
+							>
+								<option>0</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>11</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- CSV -->
+					<div class="col mt-3">
+						<div class="row float-right">
+							<a
+								href="#"
+								onclick="download_table_as_csv('Contaminated_people');"
+								>CSV</a
+							>
+						</div>
+						<div class="row float-right mt-4">
+							<a href="#" onclick="Export();">PDF</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!-- Table -->
+
+		<div
+			class="container table-responsive-lg col justify-content-md-center pb-4"
+			id="Contaminated_people"
+		>
+			<h1 id="title_tab"></h1>
+			<table class="table pb-4" id="Contaminated_people">
+				<!--mx-auto w-auto-->
+				<thead id="my_table_header">
+					<!-- En-tête du tableau -->
+				</thead>
+
+				<tbody id="my_table"></tbody>
+			</table>
+		</div>
+
+		<!-- Footer -->
+		<footer class="container footer text-right py-2 col-md-12 fixed-bottom">
+			<p class="text-muted m-0"><small>© 2020 Batimax </small></p>
+		</footer>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+			integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"
+		></script>
+		<!-- Object to Canvas-->
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"
+		></script>
+
+		<script src="script.js"></script>
+		<script src="functions.js"></script>
+	</body>
+</html>

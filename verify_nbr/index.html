@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+	<head>
+		<meta name="viewport" charset="utf-8" content="initial-scale=1" ; />
+		<meta name="author" content="Batimax" />
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+			crossorigin="anonymous"
+		/>
+
+		<title>Satellite - QRona</title>
+
+		<style>
+			.footer {
+				bottom: 0;
+				background-color: #181818;
+			}
+			.header {
+				background-color: #181818;
+			}
+			.modal-content .modal-header .close {
+				display: none;
+			}
+			#waiting {
+				display: flex;
+			}
+		</style>
+	</head>
+
+	<body class="d-flex flex-column h-100">
+		<!-- Header -->
+		<header class="header shadow mb-2 p-2">
+			<div class="container flex-md-nowrap">
+				<img
+					src="../static/logos/long_trans_blanc.png"
+					height="45"
+					class="d-inline-block align-top"
+					alt=""
+				/>
+			</div>
+		</header>
+
+		<main class="flex-shrink-0">
+			<div class="container col pb-5">
+				<!-- form -->
+				<form id="form_phone" role="form">
+					<h4>Verify your phone number</h4>
+					<hr />
+
+					<!-- Error not valid nbr -->
+					<div
+						class="container alert alert-danger alert-dismissible fade show col-md-4 text-center"
+						role="alert"
+						id="error_nbr_not_valid"
+					>
+						<strong>Telephone number not valid</strong> <br />
+						Please enter a valid one.
+						<button
+							type="button"
+							class="close"
+							r
+							data-dismiss="alert"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<!-- Error ??-->
+					<div
+						class="container alert alert-danger alert-dismissible fade show col-md-4 text-center"
+						role="alert"
+						id="error_occured"
+					>
+						<strong>An error occured</strong>
+						<button
+							type="button"
+							class="close"
+							r
+							data-dismiss="alert"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<!-- Error not authorized country code-->
+					<div
+						class="container alert alert-danger alert-dismissible fade show col-md-4 text-center"
+						role="alert"
+						id="error_unauthorized_country"
+					>
+						<strong>Not authorized country code</strong> <br />
+						Only european phone numbers are accepted.
+						<button
+							type="button"
+							class="close"
+							r
+							data-dismiss="alert"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<!-- FORM number -->
+					<div
+						class="container form-group row align-items-baseline mb-0"
+					>
+						<label for="phone">Phone number:</label>
+						<div class="form-group col">
+							<input
+								type="text"
+								class="form-control"
+								id="phone"
+								placeholder="+4111223344"
+								required
+							/>
+						</div>
+					</div>
+
+					<!-- Button -->
+					<div class="form-group d-flex justify-content-end">
+						<button
+							id="send_sms"
+							type="submit"
+							class="btn btn-primary btn-lg"
+						>
+							Send SMS
+						</button>
+					</div>
+				</form>
+
+				<!-- Verification SMS -->
+				<div class="container col-md-4 pb-5" id="form_code">
+					<h4 class="text-center">
+						Please enter the 6-digit verification code we sent via
+						SMS:
+					</h4>
+					<hr />
+					<form role="form">
+						<div
+							class="container form-group row align-items-baseline mb-0 mt-5"
+						>
+							<label for="code">SMS code:</label>
+							<div class="form-group col">
+								<input
+									type="text"
+									class="form-control"
+									id="code"
+									placeholder="Code"
+									maxlength="6"
+									size="6"
+									min="0"
+									max="9"
+									pattern="[0-9]{6}"
+									required
+								/>
+							</div>
+							<!-- Button -->
+							<div class="form-group d-flex justify-content-end">
+								<button
+									id="check_code"
+									type="submit"
+									class="btn btn-primary btn-lg"
+								>
+									Verify
+								</button>
+							</div>
+						</div>
+					</form>
+
+					<div class="text-right mt-3">
+						<div>Didn't receive the code?<br />Wait 15s before sending a new code</div>
+						<div
+							class="form-group d-flex justify-content-end mb-0 mt-2"
+						>
+							<button
+								id="send_sms_again"
+								type="submit"
+								class="btn btn-link p-0"
+							>
+								Send code again
+							</button>
+						</div>
+						<div class="form-group d-flex justify-content-end mt-1">
+							<button
+								id="change_phone_number"
+								type="submit"
+								class="btn btn-link p-0"
+							>
+								Change phone number
+							</button>
+						</div>
+						<!-- <a href="#" id="change_phone_number"
+							>Change phone number</a
+						> -->
+					</div>
+				</div>
+
+				<!-- Success phone verification -->
+				<div
+					class="container alert alert-success col-md-4 text-center"
+					id="success_nbr_verified"
+					role="alert"
+				>
+					<h1>Your phone number was successfully verified!</h1>
+					<hr />
+					<div>
+						<p>Thanks for your cooporation!</p>
+						<p>You will be redirected soon.</p>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- Footer -->
+		<footer class="footer py-2 mt-auto">
+			<div
+				class="container row align-items-center justify-content-between"
+			>
+				<div class="ml-3">
+					<a href="mailto:qrona@satellite.bar?subject=QRona"
+						><small> Questions, remarks?</small></a
+					>
+				</div>
+				<div class="text-muted">
+					<small>©2020 Batimax</small>
+				</div>
+			</div>
+		</footer>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+			integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
+
+		<script src="static/script.js"></script>
+		<script src="static/functions.js"></script>
+	</body>
+</html>
