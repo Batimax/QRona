@@ -1,4 +1,0 @@
-AuthName "Page d'administration protégée"
-AuthType Basic
-AuthUserFile "/Users/Max/Sites/WebServer/Satellite/QRona/admin/.htpasswd"
-Require valid-user
