@@ -24,7 +24,6 @@ if (isset($_POST['date'])) {
 	// echo $command;
 	echo "db_backup" . $d . " decrypted. in " .$sql;
 
-
 } else
 {
 ?>
