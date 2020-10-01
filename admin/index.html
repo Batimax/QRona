@@ -162,7 +162,7 @@
 							</div>
 
 							<div class="col">
-								<label for="selected_days_ago">Days</label>
+								<label for="selected_days_ago">Days ago</label>
 								<select
 									class="form-control-sm"
 									id="selected_days_ago"
@@ -307,6 +307,61 @@
 
 				<tbody id="my_table"></tbody>
 			</table>
+		</div>
+
+		<!-- Agreement admin -->
+		<!-- Modal -->
+		<div
+			class="modal fade"
+			id="terms"
+			data-backdrop="static"
+			data-keyboard="false"
+			tabindex="-1"
+			aria-labelledby="staticBackdropLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">
+							Terms of Agreement
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body col-md text-justify">
+						<p>
+							Par la présente, je certifie sur l'honneur n'utiliser
+							QRona et les données utilisateurs relevées dans le
+							cadre du coronavirus et non à des fins personnelles
+							ou commerciales.
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button
+							id="btn_deny"
+							type="button"
+							class="btn btn-secondary"
+							data-dismiss="modal"
+						>
+							Deny
+						</button>
+						<button
+							id="btn_accept"
+							type="button"
+							class="btn btn-primary"
+						>
+							Agree
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- Footer -->

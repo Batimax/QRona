@@ -40,6 +40,12 @@ function download_table_as_csv(table_id) {
 	document.body.removeChild(link);
 }
 
+function redirectUrl(time) {
+	setTimeout(function () {
+		window.location.replace("https://satellite.bar/");
+	}, time);
+}
+
 function Export() {
 	html2canvas(document.getElementById("Contaminated_people"), {
 		onrendered: function (canvas) {
