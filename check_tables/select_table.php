@@ -18,7 +18,6 @@ include("functions.php");
 			bottom: 0;
 			background-color: #181818;
 		}
-
 		.no_colapse {
 			white-space: nowrap;
 		}
@@ -29,6 +28,9 @@ include("functions.php");
 			color: black;
 		}
 		main a:active {
+			color: black;
+		}
+		main a:hover {
 			color: black;
 		}
 	</style>
@@ -127,8 +129,6 @@ include("functions.php");
 			</div>
 		</div>
 	</footer>
-
-
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
