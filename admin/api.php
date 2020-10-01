@@ -51,13 +51,13 @@ if ($action == 'send_selected_id' || $action == 'send_selected_unique_id') {
 
 		$selected_id = $_POST['selected_id'];
 		$selected_hour = $_POST['selected_hour'];
-		$selected_table = $_POST['selected_table'];
+		// $selected_table = $_POST['selected_table'];
 		$selected_days_ago = $_POST['selected_days_ago'];
 
 		if ($action == 'send_selected_id') {
-			$user_contaminated_infos = getUsersContaminatedFromID($dtb, $selected_id, $selected_hour, $selected_table,  $selected_days_ago);
+			$user_contaminated_infos = getUsersContaminatedFromID($dtb, $selected_id, $selected_hour,  $selected_days_ago);
 		} else {
-			$user_contaminated_infos = getUniqueUsersContaminatedFromID($dtb, $selected_id, $selected_hour, $selected_table, $selected_days_ago);
+			$user_contaminated_infos = getUniqueUsersContaminatedFromID($dtb, $selected_id, $selected_hour, $selected_days_ago);
 		}
 
 		if ($user_contaminated_infos == "no_scan_date_for_user") {
@@ -107,3 +107,5 @@ if ($action == 'get_user_data') {
 
 $answer_json = json_encode($answer);
 echo $answer_json;
+
+

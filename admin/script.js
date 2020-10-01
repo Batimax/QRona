@@ -33,24 +33,24 @@ $(document).ready(function () {
 		});
 
 		// Get all tables from db
-		$.ajax({
-			url: "api.php",
-			type: "post",
-			dataType: "json",
-			data: {
-				action: "get_tables",
-			},
-			success: function (response) {
-				console.log(response);
-				var list_tables = response.status;
-				list_tables.forEach(myFunction);
+		// $.ajax({
+		// 	url: "api.php",
+		// 	type: "post",
+		// 	dataType: "json",
+		// 	data: {
+		// 		action: "get_tables",
+		// 	},
+		// 	success: function (response) {
+		// 		console.log(response);
+		// 		var list_tables = response.status;
+		// 		list_tables.forEach(myFunction);
 
-				function myFunction(value) {
-					console.log(value);
-					$("#selected_table").append(new Option(value));
-				}
-			},
-		});
+		// 		function myFunction(value) {
+		// 			console.log(value);
+		// 			$("#selected_table").append(new Option(value));
+		// 		}
+		// 	},
+		// });
 
 		// DELETE user in db
 		$("#btn_delete_account").on("click", function (e) {
@@ -78,6 +78,7 @@ $(document).ready(function () {
 				},
 				success: function (response) {
 					console.log(response);
+					$("#title_tab").html("");
 					clearTable();
 					var table_header = "";
 
@@ -96,7 +97,7 @@ $(document).ready(function () {
 			var selected_name_id = $("#selected_name").val();
 			var selected_hour = $("#selected_hour").val();
 			var selected_days_ago = $("#selected_days_ago").val();
-			var selected_table = $("#selected_table").val();
+			// var selected_table = $("#selected_table").val();
 
 			// Extract selected name id
 			var selected_id = selected_name_id.split(":")[1];
@@ -111,7 +112,7 @@ $(document).ready(function () {
 					action: "send_selected_id",
 					selected_id: selected_id,
 					selected_hour: selected_hour,
-					selected_table: selected_table,
+					// selected_table: selected_table,
 					selected_days_ago: selected_days_ago,
 				},
 				success: function (response) {
@@ -137,7 +138,7 @@ $(document).ready(function () {
 						var table_content, date_scan_wanted, table_header;
 						table_content = "";
 						table_header =
-							" <tr><th>Date Contamination</th> <th>Nom</th> <th>Rue</th> <th>Zipcode</th> <th>Ville</th> <th>Telephone</th> <th>Email</th> <th>Date Scan</th></tr>";
+							" <tr><th>Date Contamination</th> <th>Nom</th> <th>Rue</th> <th>Zipcode</th> <th>Ville</th> <th>Telephone</th> <th>Email</th> <th>Date Scan</th> <th>Table</th></tr>";
 
 						user_contaminated_infos.forEach(myFunction);
 
@@ -160,6 +161,7 @@ $(document).ready(function () {
 									var phone = children_value.phone;
 									var email = children_value.email;
 									var date_scan = children_value.date_scan;
+									var table = children_value.table;
 
 									var line =
 										'<tr><th class="no_colapse"> ' +
@@ -184,13 +186,16 @@ $(document).ready(function () {
 										"</td>" +
 										'<td class="no_colapse" > ' +
 										date_scan +
+										"</td>" +
+										"<td> " +
+										table +
 										"</td></tr>";
 
 									table_content = table_content + line;
 								}
 								table_content =
 									table_content +
-									'<tr><td colspan=7 class="table-dark">  </td></tr>';
+									'<tr><td colspan=9 class="table-dark">  </td></tr>';
 							}
 						}
 						$("#my_table_header").html(table_header);
@@ -207,7 +212,7 @@ $(document).ready(function () {
 
 			var selected_name_id = $("#selected_name").val();
 			var selected_hour = $("#selected_hour").val();
-			var selected_table = $("#selected_table").val();
+			// var selected_table = $("#selected_table").val();
 			var selected_days_ago = $("#selected_days_ago").val();
 
 			// Extract selected name id
@@ -223,7 +228,7 @@ $(document).ready(function () {
 					action: "send_selected_unique_id",
 					selected_id: selected_id,
 					selected_hour: selected_hour,
-					selected_table: selected_table,
+					// selected_table: selected_table,
 					selected_days_ago: selected_days_ago,
 				},
 				success: function (response) {
@@ -249,7 +254,7 @@ $(document).ready(function () {
 						var table_content, table_header;
 						table_content = "";
 						table_header =
-							" <tr><th>Nom</th> <th>Rue</th> <th>Zipcode</th> <th>Ville</th> <th>Telephone</th> <th>Email</th>";
+							" <tr><th>Nom</th> <th>Rue</th> <th>Zipcode</th> <th>Ville</th> <th>Telephone</th> <th>Email</th> <th>Table</th></tr>";
 
 						user_contaminated_infos.forEach(myFunction);
 
@@ -270,6 +275,7 @@ $(document).ready(function () {
 									var city = children_value.city;
 									var phone = children_value.phone;
 									var email = children_value.email;
+									var table = children_value.table;
 
 									var line =
 										"<tr><td>" +
@@ -289,6 +295,9 @@ $(document).ready(function () {
 										"</td>" +
 										"<td> " +
 										email +
+										"</td>" +
+										"<td> " +
+										table +
 										"</td></tr>";
 
 									table_content = table_content + line;

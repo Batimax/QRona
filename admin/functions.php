@@ -118,21 +118,23 @@ function getUserData($dtb, $user_id)
 }
 
 
-function getUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
+function getUsersContaminatedFromID($dtb, $id, $hour, $days_ago)
 {
 	// Get scan dates of concerned user
-	$req = $dtb->prepare('	SELECT date_scan
+	$req = $dtb->prepare('	SELECT date_scan, user_table
 							FROM logs
 							WHERE user = :user_key
-							AND logs.user_table = :user_table
+							-- AND logs.user_table = :user_table
 							AND date_scan >= DATE_SUB(NOW(), INTERVAL :days_ago DAY)');
 	$req->execute(array(
 		'user_key' => $id,
 		'days_ago' => $days_ago,
-		'user_table' => $table
+		// 'user_table' => $table
 	));
 	$scan_dates = $req->fetchAll(PDO::FETCH_ASSOC);
 	$req->closeCursor();
+
+	// print_r($scan_dates);
 
 	if (!$scan_dates) {
 		$scan_dates = false;
@@ -144,8 +146,10 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
 
 		$contaminated_user_date_scan_id = array();
 		$contaminated_user_date_scan_id[0] = 0;
+		// $scan_dates = $scan_dates[0];
 
 		foreach ($scan_dates as $date_scan_wanted_user) {
+			$table = $date_scan_wanted_user['user_table'];
 			$date_scan_wanted_user = $date_scan_wanted_user['date_scan'];
 
 			//Create variables containing as much ? as in $contaminated_user_date_scan_id
@@ -190,6 +194,7 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
 				// Add the multiple dates of a user around the wanted date on only one array
 				if (sizeof($contaminated_user_infos) > 1) {
 					foreach ($contaminated_user_infos as $k => &$array_user) {
+						$contaminated_user_infos[$k]['table'] = $table;
 
 						// Loop through $all contaminated users to see if this user appears multiple times
 						foreach ($contaminated_user_infos as $k_child => &$array_user_child) {
@@ -222,18 +227,18 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
 	return $total_user_contaminated_infos;
 }
 
-function getUniqueUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
+function getUniqueUsersContaminatedFromID($dtb, $id, $hour, $days_ago)
 {
 	// Get scan dates of concerned user
-	$req = $dtb->prepare('	SELECT date_scan
+	$req = $dtb->prepare('	SELECT date_scan, user_table
 							FROM logs
 							WHERE user = :user_key
-							AND logs.user_table = :user_table
+							-- AND logs.user_table = :user_table
 							AND date_scan >= DATE_SUB(NOW(), INTERVAL :days_ago DAY)');
 	$req->execute(array(
 		'user_key' => $id,
 		'days_ago' => $days_ago,
-		'user_table' => $table
+		// 'user_table' => $table
 	));
 	$scan_dates = $req->fetchAll(PDO::FETCH_ASSOC);
 	$req->closeCursor();
@@ -251,6 +256,7 @@ function getUniqueUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
 
 
 		foreach ($scan_dates as $date_scan_wanted_user) {
+			$table = $date_scan_wanted_user['user_table'];
 			$date_scan_wanted_user = $date_scan_wanted_user['date_scan'];
 
 			//Create variables containing as much ? as in $contaminated_user_date_scan_id
@@ -298,6 +304,8 @@ function getUniqueUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
 					foreach ($contaminated_user_infos as $k => &$array_user) {
 						// Get id of all contaminated users when multiple users contaminated
 						$contaminated_users_id[] = $array_user['user'];
+						$contaminated_user_infos[$k]['table'] = $table;
+
 
 						// Loop through $all contaminated users to see if this user appears multiple times
 						foreach ($contaminated_user_infos as $k_child => &$array_user_child) {
