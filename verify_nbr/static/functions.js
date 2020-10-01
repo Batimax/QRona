@@ -25,7 +25,7 @@ function smsTimeOut() {
 function validate_form() {
 	var phone_success = false;
 
-	var reg_phone = /^([+][(]?[0-9]{1,3}[)]?)\s*[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,5})$/g;
+	var reg_phone = /^([(]?([+]|[0]{2})?[0-9]{1,3}[)]?)\s*[-\s\.]?([(]?[0-9]{1,3}[)]?)([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,5})$/g;
 
 	if (!reg_phone.test(phone.value)) {
 		$("#phone").removeClass("is-valid");
@@ -41,6 +41,29 @@ function validate_form() {
 	} else {
 		return false;
 	}
+}
+
+function formatePhoneNumber(phone) {
+	//
+	var reg_phone_replace = /[ -]+/g;
+	phone = phone.replace(reg_phone_replace, "");
+	reg_phone_replace = /^[0]{2}/g;
+	phone = phone.replace(reg_phone_replace, "+");
+	reg_phone_replace = /^[(][0]{2}/g;
+	phone = phone.replace(reg_phone_replace, "(+");
+
+	console.log(phone);
+	phoneNumber_parsed = new libphonenumber.parsePhoneNumber(phone);
+	console.log(phoneNumber_parsed);
+
+	var okay = phoneNumber_parsed.isValid();
+	console.log("is okay? " + okay);
+
+	phoneNumber = phoneNumber_parsed.format("E.164");
+	// phoneNumber = new libphonenumber.format(E.164: "+12133734253");
+	console.log(phoneNumber);
+
+	return false;
 }
 
 function validate_code() {

@@ -2,7 +2,8 @@ $(document).ready(function () {
 	// Hide containers
 	hideContainers();
 
-	// Extract GET variables (zones)
+
+	// Extract GET variables
 	var $_GET = {},
 		userID;
 
@@ -23,9 +24,10 @@ $(document).ready(function () {
 		if (validate_form()) {
 			var phone = $("#phone").val().trim();
 
-			console.log(phone);
-			var reg_phone_replace = /[ -]+/g;
-			phone = phone.replace(reg_phone_replace, "");
+
+			phone = formatePhoneNumber(phone);
+
+
 			console.log(phone);
 
 			sessionStorage.setItem("phone_number", phone);
@@ -62,9 +64,8 @@ $(document).ready(function () {
 						$("#error_occured").show();
 					}
 				},
-				error: function(response){
-					console.log(response
-						)
+				error: function (response) {
+					console.log(response);
 				},
 			});
 		}
@@ -99,9 +100,7 @@ $(document).ready(function () {
 						$("#form_code").hide();
 
 						// Redirect user to logs
-						var url =
-							"../index.html?table=" +
-							user_table;
+						var url = "../index.html?table=" + user_table;
 						redirectLogTimeOut(url);
 					} else if (response.error == "wrong_code") {
 						$("#code").removeClass("is-valid");
