@@ -1,6 +1,6 @@
 <?php
 // TEST ENV
-require_once __DIR__.'/env_secur.php';
+require_once __DIR__.'/../init.php';
 
 if (isset($_POST['name']) and isset($_POST['pass'])) {
 
