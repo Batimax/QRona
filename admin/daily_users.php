@@ -33,7 +33,7 @@ $days_ago = $_GET['days_ago']
 
 				if(!$data_users){
 					$data_users = false;
-					echo "No client today";
+					echo "<h2> No client this day </h2>";
 				} else {
 					foreach ($data_users as $id) {
 						$users_id[] = $id['user'];
@@ -55,7 +55,7 @@ $days_ago = $_GET['days_ago']
 
 				if (!$data_users) {
 					$data_users = false;
-					echo "No client today";
+					echo "<h2> No client this day </h2>";
 				} else {
 					foreach ($data_users as $user) {
 
