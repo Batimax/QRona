@@ -2,11 +2,12 @@
 // https://www.portaltechnologies.uk/mysql-database-backup-encryption-and-decryption/
 //configuration
 
-genDBBackup();
 function genDBBackup () {
 	require_once __DIR__.'/init.php';
 
 	$secret = decryptEncryptedEnv('BD_BACKUP_CRYPT_KEY');
+	$ENVIRONMENT = decryptEncryptedEnv('ENVIRONMENT');
+
 	// $folder = '/srv/data/nextcloud/mcurvat/files/export';
 	$folder = getenv("DOCUMENT_ROOT") . '/db_dumps/'; // change the folder name to suit
 	$d = date('dmy');
@@ -41,8 +42,7 @@ function genDBBackup () {
 	//remove the sql dump file and just leave the encrypted file
 	$command .= "rm -f $sql";
 	// //execute it
-	echo $command;
 	echo $output = shell_exec($command);
-	echo "<br /> command executed";
+	echo "<br /> Db crypted and stored in " . $folder;
 }
 ?>
