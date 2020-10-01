@@ -1,2 +1,6 @@
 admin/security/.env
 admin/security/.env.prod
+check_tables/htaccess
+check_tables/htpasswd
+admin/htaccess
+admin/htpasswd
