@@ -25,52 +25,58 @@ include("functions.php");
 		footer a{
 			color: hotpink;
 		}
+		main a {
+			color: black;
+		}
+		main a:active {
+			color: black;
+		}
 	</style>
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
 	<!-- Header -->
 	<header class="header shadow mb-2 p-2">
 		<div class="container flex-md-nowrap">
-			<img src="../static/logos/long_trans_blanc.png" height="45" class="d-inline-block align-top" alt="" />
+			<img
+				src="../static/logos/long_trans_blanc.png"
+				height="45"
+				class="d-inline-block align-top"
+				alt=""
+			/>
 		</div>
 	</header>
 
-
 	<main class="flex-shrink-0">
-
+		<h1 class="d-flex pl-2 float-left">
+			<a href="index.php"> < </a>
+		</h1>
 		<div class="container col-md-11">
 			<h1>
 				<?php
-				echo 'Tables Satellite';
+				$table = $_GET['table'];
+				echo '<a href=\'index.php\'> Table ' . $table . '</a>';
 				?>
 
 			</h1>
 			<div class="table-responsive-sm pb-4">
-				<table class="table table-striped table-hover">
+				<table class="table table-striped">
 					<thead>
 						<!-- En-tête du tableau -->
 						<tr>
-							<th>Table</th>
 							<th>Nom</th>
 							<th>Heure Scan</th>
 						</tr>
 					</thead>
-					<tbody>
 
 					<?php
-
-					// Get all tables
-					$all_tables = getTables($dtb);
-
-					foreach ($all_tables as $table) {
 
 						$req = $dtb->prepare("SELECT users.lastname, users.firstname, DATE_FORMAT(logs.date_scan,'%H:%i') AS date_scan
 						FROM users
 						INNER JOIN logs
 						ON logs.user = users.id
-						WHERE logs.date_scan >= DATE_SUB(NOW(), INTERVAL 1 HOUR)
+						WHERE logs.date_scan >= DATE_SUB(NOW(), INTERVAL 4 HOUR)
 						AND logs.user_table = :tables
 						ORDER BY users.last_connection");
 						$req->execute(array(
@@ -80,7 +86,7 @@ include("functions.php");
 						$req->closeCursor();
 
 						// New line and print table nuber
-						echo '<tr href="select_table.php?table='.$table.'"> <td>' . $table . '</td>';
+						echo '<tr>';
 
 						if (!$data_users) {
 							// Nobody at the table
@@ -100,9 +106,7 @@ include("functions.php");
 							}
 							echo '</td></tr>';
 						}
-					}
 					?>
-					</tbody>
 				</table>
 			</div>
 		</div>
@@ -132,14 +136,5 @@ include("functions.php");
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
-
-		<script type="text/javascript">
-		$(document).ready(function(){
-			$('tbody tr').click(function(){
-				window.location = $(this).attr('href');
-				return false;
-			});
-		});
-	</script>
 
 </body>
