@@ -64,6 +64,59 @@ function Export() {
 	});
 }
 
+function getDateAgo(days) {
+	var now = new Date(); //"now"
+	now.setDate(now.getDate() - days);
+
+	m = now.getMonth() + 1;
+	if (m == 1) {
+		M = "Janvier";
+	} else if (m == 2) {
+		M = "Février";
+	} else if (m == 3) {
+		M = "Mars";
+	} else if (m == 4) {
+		M = "Avril";
+	} else if (m == 5) {
+		M = "Mai";
+	} else if (m == 6) {
+		M = "Juin";
+	} else if (m == 7) {
+		M = "Juillet";
+	} else if (m == 8) {
+		M = "Août";
+	} else if (m == 9) {
+		M = "Septembre";
+	} else if (m == 10) {
+		M = "Octobre";
+	} else if (m == 11) {
+		M = "Novembre";
+	} else if (m == 12) {
+		M = "Décembre";
+	}
+	d = now.getDate();
+	D = now.getDay() + 1;
+	if (D == 1) {
+		D = "Lundi";
+	} else if (D == 2) {
+		D = "Mardi";
+	} else if (D == 3) {
+		D = "Mercredi";
+	} else if (D == 4) {
+		D = "Jeudi";
+	} else if (D == 5) {
+		D = "Vendredi";
+	} else if (D == 6) {
+		D = "Samedi";
+	} else if (D == 7) {
+		D = "Dimanche";
+	}
+	var date = '<h1>' + D + " " + d + " " + M + '</h1>';
+	return date;
+}
+
+
+
 function clearTable() {
 	$("#my_table").html("");
 	$("#my_table_header").html("");
@@ -165,7 +218,8 @@ function getUserData() {
 					var email = user_data.email;
 					var date_scan = user_data.last_connection;
 
-					var table_content = '<tr><th class="no_colapse"> ' +
+					var table_content =
+						'<tr><th class="no_colapse"> ' +
 						name +
 						"</td> " +
 						"<td> " +

@@ -79,6 +79,11 @@ $(document).ready(function () {
 				success: function (response) {
 					console.log(response);
 					clearTable();
+					var table_header = "";
+
+					table_header = getDateAgo(selected_daily_info_days);
+
+					$("#my_table_header").html(table_header);
 					$("#my_table").html(response.status);
 				},
 			});
