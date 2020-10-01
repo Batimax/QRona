@@ -137,7 +137,7 @@ $(document).ready(function () {
 						var table_content, date_scan_wanted, table_header;
 						table_content = "";
 						table_header =
-							" <tr><th>Date Contamination</th> <th>Nom</th> <th>Rue</th> <th>Ville</th> <th>Telephone</th> <th>Email</th> <th>Date Scan</th></tr>";
+							" <tr><th>Date Contamination</th> <th>Nom</th> <th>Rue</th> <th>Zipcode</th> <th>Ville</th> <th>Telephone</th> <th>Email</th> <th>Date Scan</th></tr>";
 
 						user_contaminated_infos.forEach(myFunction);
 
@@ -155,6 +155,7 @@ $(document).ready(function () {
 										" " +
 										children_value.firstname;
 									var adress = children_value.adress;
+									var zipcode = children_value.zipcode;
 									var city = children_value.city;
 									var phone = children_value.phone;
 									var email = children_value.email;
@@ -168,6 +169,9 @@ $(document).ready(function () {
 										"</td> " +
 										"<td> " +
 										adress +
+										"</td>" +
+										"<td> " +
+										zipcode +
 										"</td>" +
 										"<td> " +
 										city +
@@ -190,7 +194,7 @@ $(document).ready(function () {
 							}
 						}
 						$("#my_table_header").html(table_header);
-						$("#title_tab").html(nom);
+						$("#title_tab").html(selected_name);
 						$("#my_table").html(table_content);
 					}
 				},
@@ -245,7 +249,7 @@ $(document).ready(function () {
 						var table_content, table_header;
 						table_content = "";
 						table_header =
-							" <tr><th>Nom</th> <th>Rue</th> <th>Ville</th> <th>Telephone</th> <th>Email</th>";
+							" <tr><th>Nom</th> <th>Rue</th> <th>Zipcode</th> <th>Ville</th> <th>Telephone</th> <th>Email</th>";
 
 						user_contaminated_infos.forEach(myFunction);
 
@@ -262,6 +266,7 @@ $(document).ready(function () {
 										" " +
 										children_value.firstname;
 									var adress = children_value.adress;
+									var zipcode = children_value.zipcode;
 									var city = children_value.city;
 									var phone = children_value.phone;
 									var email = children_value.email;
@@ -272,6 +277,9 @@ $(document).ready(function () {
 										"</td> " +
 										"<td> " +
 										adress +
+										"</td>" +
+										"<td> " +
+										zipcode +
 										"</td>" +
 										"<td> " +
 										city +

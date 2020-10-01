@@ -60,6 +60,7 @@ include("../static/api/functions.php");
 							<tr>
 								<th>Nom</th>
 								<th>Rue</th>
+								<th>Zipcode</th>
 								<th>Ville </th>
 								<th>Téléphone </th>
 								<th>Email </th>
@@ -73,6 +74,7 @@ include("../static/api/functions.php");
 					foreach ($data_users as $data_user) {
 						echo '<tr> <td> ' . $data_user["lastname"] . ' ' . $data_user["firstname"] . '</td>';
 						echo '<td> ' . $data_user["adress"] . '</td>';
+						echo '<td> ' . $data_user["zipcode"] . '</td>';
 						echo '<td> ' . $data_user["city"] . '</td>';
 						echo '<td> ' . $data_user["phone"] . '</td>';
 						echo '<td> ' . $data_user["email"] . '</td>';

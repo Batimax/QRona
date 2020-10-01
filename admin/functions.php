@@ -151,7 +151,7 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
 			//Create variables containing as much ? as in $contaminated_user_date_scan_id
 			$in  = str_repeat('?,', count($contaminated_user_date_scan_id) - 1) . '?';
 
-			$query = "SELECT logs.user, logs.date_scan, logs.id, users.lastname, users.firstname, users.adress, users.city, users.phone, users.email
+			$query = "SELECT logs.user, logs.date_scan, logs.id, users.lastname, users.firstname, users.adress, users.zipcode, users.city, users.phone, users.email
 				FROM users
 				INNER JOIN logs
 				ON logs.user = users.id
@@ -257,7 +257,7 @@ function getUniqueUsersContaminatedFromID($dtb, $id, $hour, $table, $days_ago)
 			$in_log_id  = str_repeat('?,', count($contaminated_user_date_scan_id) - 1) . '?';
 			$in_log_user  = str_repeat('?,', count($contaminated_users_id) - 1) . '?';
 
-			$query = "SELECT logs.user, logs.date_scan, logs.id, users.lastname, users.firstname, users.adress, users.city, users.phone, users.email
+			$query = "SELECT logs.user, logs.date_scan, logs.id, users.lastname, users.firstname, users.adress, users.zipcode, users.city, users.phone, users.email
 				FROM users
 				INNER JOIN logs
 				ON logs.user = users.id

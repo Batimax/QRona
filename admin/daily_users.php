@@ -82,6 +82,7 @@ $days_ago = $_GET['days_ago']
 							<tr>
 								<th>Nom</th>
 								<th>Rue</th>
+								<th>Zipcode </th>
 								<th>Ville </th>
 								<th>Téléphone </th>
 								<th>Email </th>
@@ -96,6 +97,7 @@ $days_ago = $_GET['days_ago']
 						// $row_nbr = sizeof($date_users[$data_user["id"]]);
 						echo '<tr> <td> ' . $data_user["lastname"] . ' ' . $data_user["firstname"] . '</td>';
 						echo '<td> ' . $data_user["adress"] . '</td>';
+						echo '<td> ' . $data_user["zipcode"] . '</td>';
 						echo '<td> ' . $data_user["city"] . '</td>';
 						echo '<td> ' . $data_user["phone"] . '</td>';
 						echo '<td> ' . $data_user["email"] . '</td>';
