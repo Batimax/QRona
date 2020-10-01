@@ -5,7 +5,7 @@ require_once __DIR__.'/init.php';
 $folder= getenv("DOCUMENT_ROOT").'/db_dumps/';
 $halt='1';
 //retrieve the data from the URL
-$p= $secret = decryptEncryptedEnv('BD_BACKUP_CRYPT_KEY');
+$p= decryptEncryptedEnv('BD_BACKUP_CRYPT_KEY');
 
 if (isset($_POST['date'])) {
 
