@@ -44,7 +44,7 @@ function validate_form() {
 }
 
 function formatePhoneNumber(phone) {
-	//
+	//https://gitlab.com/catamphetamine/libphonenumber-js/#cdn
 	var reg_phone_replace = /[ -]+/g;
 	phone = phone.replace(reg_phone_replace, "");
 	reg_phone_replace = /^[0]{2}/g;
