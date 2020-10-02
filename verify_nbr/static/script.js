@@ -76,6 +76,7 @@ $(document).ready(function () {
 	// Check entered code
 	$("#check_code").on("click", function (e) {
 		e.preventDefault();
+		checkCodeTimeOut();
 		if (validate_code()) {
 			var code = $("#code").val();
 			console.log("Checking code...");

@@ -22,6 +22,18 @@ function smsTimeOut() {
 	}, 15000);
 }
 
+function checkCodeTimeOut() {
+	var enableSubmit = function () {
+		$("#check_code").removeAttr("disabled");
+	};
+
+	$("#check_code").attr("disabled", true);
+
+	setTimeout(function () {
+		enableSubmit();
+	}, 2000);
+}
+
 function validate_form() {
 	var phone_success = false;
 

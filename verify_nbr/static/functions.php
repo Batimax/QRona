@@ -26,7 +26,7 @@ function APIsms ($verif_code,$phone_number){
 	$TWILIO_SID = decryptEncryptedEnv('TWILIO_SID');
 	$TWILIO_AUTH_TOKEN = decryptEncryptedEnv('TWILIO_AUTH_TOKEN');
 
-	$sms_content = $verif_code . ' : Satellite phone number verification code: ';
+	$sms_content = $verif_code . ' : Satellite phone number verification code <3';
 
 	// A Twilio number you own with SMS capabilities
 	$twilio_number = "+12408835962";
