@@ -93,7 +93,7 @@
 						id="error_unauthorized_country"
 					>
 						<strong>Not authorized country code</strong> <br />
-						Only european phone numbers are accepted.
+						Only european phone numbers are accepted. (example: Switzerland: +41, France +33)
 						<button
 							type="button"
 							class="close"
@@ -107,10 +107,10 @@
 
 					<!-- FORM number -->
 					<div
-						class="container form-group row align-items-baseline mb-0"
+						class="container form-group align-items-baseline mb-0"
 					>
 						<label for="phone">Phone number:</label>
-						<div class="form-group col">
+						<div class="form-group">
 							<input
 								type="text"
 								class="form-control"
@@ -118,6 +118,11 @@
 								placeholder="+4111223344"
 								required
 							/>
+							<small
+								id="phone_message"
+								class="form-text text-muted"
+								>Do not forget the international calling code</small
+							>
 						</div>
 					</div>
 

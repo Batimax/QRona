@@ -65,20 +65,28 @@ function formatePhoneNumber(phone) {
 	phone = phone.replace(reg_phone_replace, "(+");
 
 	console.log("Phone regex: " + phone);
-	phoneNumber_parsed = new libphonenumber.parsePhoneNumber(phone);
-	// console.log(phoneNumber_parsed);
+	try {
+		const phoneNumber_parsed = new libphonenumber.parsePhoneNumber(phone);
 
-	if ( phoneNumber_parsed.isValid()) {
-		console.log("Phone number okay.");
+		if (phoneNumber_parsed.isValid()) {
+			console.log("Phone number okay.");
 
-		phoneNumber = phoneNumber_parsed.format("E.164");
+			phoneNumber = phoneNumber_parsed.format("E.164");
 
-		console.log("Phone number E.164: " + phoneNumber);
+			console.log("Phone number E.164: " + phoneNumber);
 
-		return phoneNumber;
-	} else {
-		console.log("Phone number not okay.");
-		return false;
+			return phoneNumber;
+		} else {
+			console.log("Phone number not okay.");
+			return false;
+		}
+
+	} catch (error) {
+		if (error.message) {
+			// Not a phone number, non-existent country, etc.
+			console.log(error.message);
+			return error.message;
+		}
 	}
 }
 

@@ -28,6 +28,9 @@ $(document).ready(function () {
 			if (phone === false) {
 				$("#phone").removeClass("is-valid");
 				$("#phone").addClass("is-invalid");
+			} else if (phone === "INVALID_COUNTRY") {
+				$("#phone").addClass("is-invalid");
+				$("#error_unauthorized_country").fadeIn();
 			} else {
 				console.log(phone);
 
