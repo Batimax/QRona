@@ -9,8 +9,8 @@ function sendSMS($dtb, $userID, $phone_number) {
 	// generate rdm number
 	$verif_code = rand(100000, 999999);
 
-		// $status_api = APIsms($verif_code, $phone_number);
-		$status_api = 'sucess';
+		$status_api = APIsms($verif_code, $phone_number);
+		// $status_api = 'success';
 		// If sms correctly sent
 		if ($status_api == 'success'){
 			storeRdmNbrDB($dtb, $verif_code, $userID);
@@ -26,7 +26,7 @@ function APIsms ($verif_code,$phone_number){
 	$TWILIO_SID = decryptEncryptedEnv('TWILIO_SID');
 	$TWILIO_AUTH_TOKEN = decryptEncryptedEnv('TWILIO_AUTH_TOKEN');
 
-	$sms_content = $verif_code;
+	$sms_content = $verif_code . ' : Satellite phone number verification code: ';
 
 	// A Twilio number you own with SMS capabilities
 	$twilio_number = "+12408835962";

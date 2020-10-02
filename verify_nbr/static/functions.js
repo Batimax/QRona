@@ -52,18 +52,22 @@ function formatePhoneNumber(phone) {
 	reg_phone_replace = /^[(][0]{2}/g;
 	phone = phone.replace(reg_phone_replace, "(+");
 
-	console.log(phone);
+	console.log("Phone regex: " + phone);
 	phoneNumber_parsed = new libphonenumber.parsePhoneNumber(phone);
-	console.log(phoneNumber_parsed);
+	// console.log(phoneNumber_parsed);
 
-	var okay = phoneNumber_parsed.isValid();
-	console.log("is okay? " + okay);
+	if ( phoneNumber_parsed.isValid()) {
+		console.log("Phone number okay.");
 
-	phoneNumber = phoneNumber_parsed.format("E.164");
-	// phoneNumber = new libphonenumber.format(E.164: "+12133734253");
-	console.log(phoneNumber);
+		phoneNumber = phoneNumber_parsed.format("E.164");
 
-	return false;
+		console.log("Phone number E.164: " + phoneNumber);
+
+		return phoneNumber;
+	} else {
+		console.log("Phone number not okay.");
+		return false;
+	}
 }
 
 function validate_code() {
