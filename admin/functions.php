@@ -47,6 +47,19 @@ function deleteUser($dtb, $user_id)
 	return $response;
 }
 
+function updateCityZipcode($dtb, $userid_city_zipcode)
+{
+	$query = 'UPDATE users SET city = :city, zipcode = :zipcode
+	WHERE id = :userid';
+	$req = $dtb->prepare($query);
+	$req->execute(array(
+		'userid' => $userid_city_zipcode['id'],
+		'city' => $userid_city_zipcode['city'],
+		'zipcode' => $userid_city_zipcode['zipcode']
+	));
+	$req->closeCursor();
+}
+
 function getInfoDailyHTML($days_ago) {
 	// Get html mail content from a page of the server
 	$url = 'http://localhost:8888/Satellite/QRona/admin/daily_users.php?days_ago=' . $days_ago;
