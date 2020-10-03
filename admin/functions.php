@@ -62,9 +62,17 @@ function updateCityZipcode($dtb, $userid_city_zipcode)
 
 function getInfoDailyHTML($days_ago) {
 	// Get html mail content from a page of the server
-	$url = 'http://localhost:8888/Satellite/QRona/admin/daily_users.php?days_ago=' . $days_ago;
-	$username = "max-yoyou"; // AIE AIE AIE AIE VITE .ENV
-	$password = "CQL!8]M?+&^AumJ^";
+	$ADMIN_ACCESS_USER = decryptEncryptedEnv('ADMIN_ACCESS_USER');
+	$ADMIN_PASSWORD = decryptEncryptedEnv('ADMIN_PASSWORD');
+	$ENVIRONMENT = decryptEncryptedEnv('ENVIRONMENT');
+
+	if ($ENVIRONMENT == 'local_dev') {
+		$url = 'http://localhost:8888/Satellite/QRona/admin/daily_users.php?days_ago=' . $days_ago;
+	} else {
+		$url = 'https://satellite.bar/qr/admin/daily_users.php?days_ago=' . $days_ago;
+	}
+	$username = $ADMIN_ACCESS_USER;
+	$password = $ADMIN_PASSWORD;
 	$context = stream_context_create(array(
 		'http' => array(
 			'header' => 'Authorization: Basic ' . base64_encode("$username:$password")
