@@ -30,12 +30,16 @@
 			.modal-content .modal-header .close {
 				display: none;
 			}
+			footer a {
+				color: hotpink;
+			}
 		</style>
 	</head>
 
-	<body class="container">
+	<body class="d-flex flex-column h-100">
+
 		<!-- Header -->
-		<header class="header container col-md-4 shadow mb-2 p-2">
+		<header class="header shadow mb-2 p-2">
 			<div class="container flex-md-nowrap">
 				<img
 					src="static/logos/long_trans_blanc.png"
@@ -45,7 +49,8 @@
 				/>
 			</div>
 		</header>
-		<div class="container">
+		<main class="flex-shrink-0">
+		<!-- <div class="container"> -->
 			<!-- Modal -->
 			<div
 				class="modal fade"
@@ -325,17 +330,19 @@
 				</p>
 			</div>
 		</div>
-
+	</main>
 		<!-- Footer -->
-		<footer class="container footer py-2 col-md-4">
-			<div class="row align-items-center justify-content-between">
-				<div class="text-muted pl-2">
+		<footer class="footer py-2 mt-auto">
+			<div
+				class="container row align-items-center justify-content-between"
+			>
+				<div class="ml-3">
 					<a href="mailto:qrona@satellite.bar?subject=QRona"
 						><small> Questions, remarks?</small></a
 					>
 				</div>
-				<div class="text-muted pr-2">
-					<small>©2020 Batimax </small>
+				<div class="text-muted">
+					<small>©2020 Batimax</small>
 				</div>
 			</div>
 		</footer>
@@ -358,5 +365,6 @@
 
 		<script src="static/js/script.js?foo=bar2"></script>
 		<script src="static/js/functions.js?foo=bar2"></script>
+
 	</body>
 </html>

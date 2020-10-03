@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 	<head>
 		<meta name="viewport" charset="utf-8" content="initial-scale=1" ; />
 		<meta name="author" content="Batimax" />
@@ -21,10 +21,13 @@
 			.no_colapse {
 				white-space: nowrap;
 			}
+			footer a {
+				color: hotpink;
+			}
 		</style>
 	</head>
 
-	<body>
+	<body class="d-flex flex-column h-100">
 		<!-- Header -->
 		<header class="header shadow mb-2 p-2">
 			<div class="container flex-md-nowrap">
@@ -37,123 +40,127 @@
 			</div>
 		</header>
 
-		<!-- Modal Delete User-->
-		<div class="container">
-			<div
-				class="modal fade"
-				id="modal_delete_user"
-				data-backdrop="static"
-				data-keyboard="false"
-				tabindex="-1"
-				aria-labelledby="staticBackdropLabel"
-				aria-hidden="true"
-			>
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="staticBackdropLabel">
-								DELETE USER?
-							</h5>
-							<button
-								type="button"
-								class="close"
-								data-dismiss="modal"
-								aria-label="Close"
-							>
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body col-md text-justify">
-							<p id="msg_delete_user"></p>
-						</div>
-						<div class="modal-footer">
-							<button
-								id="btn_deny_delete_user"
-								type="button"
-								class="btn btn-secondary"
-								data-dismiss="modal"
-							>
-								NON
-							</button>
-							<button
-								id="btn_accept_delete_user"
-								type="button"
-								class="btn btn-danger"
-							>
-								OUI
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modal User Deleted-->
-		<div class="container">
-			<div
-				class="modal fade"
-				id="modal_user_deleted"
-				data-backdrop="static"
-				data-keyboard="false"
-				tabindex="-1"
-				aria-labelledby="staticBackdropLabel"
-				aria-hidden="true"
-			>
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body col-md text-justify">
-							<h3>User successfully deleted</h3>
-						</div>
-						<div class="modal-footer">
-							<button
-								id="modal_user_deleted_ok"
-								type="button"
-								class="btn btn-secondary"
-							>
-								Ok
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Research form -->
-		<div class="container col-md-10">
-			<form role="form" id="form_names">
-				<div class="row">
-					<!-- first col -->
-					<div class="col-md-4">
-						<div class="col">
-							<label for="selected_name">Nom Prénom</label>
-							<input
-								class="form-control"
-								type="text"
-								id="selected_name"
-								list="list_name"
-								placeholder="Nom Prénom"
-							/>
-							<datalist type="text" id="list_name" required>
-							</datalist>
-						</div>
-
-						<div class="row pt-2 d-flex justify-content-around">
-							<div class="">
-								<label for="selected_hour">Heures</label>
-								<select
-									class="form-control-sm"
-									id="selected_hour"
+		<main class="flex-shrink-0">
+			<!-- Modal Delete User-->
+			<div class="container">
+				<div
+					class="modal fade"
+					id="modal_delete_user"
+					data-backdrop="static"
+					data-keyboard="false"
+					tabindex="-1"
+					aria-labelledby="staticBackdropLabel"
+					aria-hidden="true"
+				>
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5
+									class="modal-title"
+									id="staticBackdropLabel"
 								>
-									<option>2</option>
-									<option>4</option>
-									<option>6</option>
-									<option>8</option>
-									<option>12</option>
-									<option>24</option>
-								</select>
+									DELETE USER?
+								</h5>
+								<button
+									type="button"
+									class="close"
+									data-dismiss="modal"
+									aria-label="Close"
+								>
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body col-md text-justify">
+								<p id="msg_delete_user"></p>
+							</div>
+							<div class="modal-footer">
+								<button
+									id="btn_deny_delete_user"
+									type="button"
+									class="btn btn-secondary"
+									data-dismiss="modal"
+								>
+									NON
+								</button>
+								<button
+									id="btn_accept_delete_user"
+									type="button"
+									class="btn btn-danger"
+								>
+									OUI
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal User Deleted-->
+			<div class="container">
+				<div
+					class="modal fade"
+					id="modal_user_deleted"
+					data-backdrop="static"
+					data-keyboard="false"
+					tabindex="-1"
+					aria-labelledby="staticBackdropLabel"
+					aria-hidden="true"
+				>
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body col-md text-justify">
+								<h3>User successfully deleted</h3>
+							</div>
+							<div class="modal-footer">
+								<button
+									id="modal_user_deleted_ok"
+									type="button"
+									class="btn btn-secondary"
+								>
+									Ok
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Research form -->
+			<div class="container col-md-10">
+				<form role="form" id="form_names">
+					<div class="row">
+						<!-- first col -->
+						<div class="col-md-4">
+							<div class="col">
+								<label for="selected_name">Nom Prénom</label>
+								<input
+									class="form-control"
+									type="text"
+									id="selected_name"
+									list="list_name"
+									placeholder="Nom Prénom"
+								/>
+								<datalist type="text" id="list_name" required>
+								</datalist>
 							</div>
 
-							<!-- <div class="col">
+							<div class="row pt-2 d-flex justify-content-around">
+								<div class="">
+									<label for="selected_hour">Heures</label>
+									<select
+										class="form-control-sm"
+										id="selected_hour"
+									>
+										<option>2</option>
+										<option>4</option>
+										<option>6</option>
+										<option>8</option>
+										<option>12</option>
+										<option>24</option>
+									</select>
+								</div>
+
+								<!-- <div class="col">
 								<label for="selected_table">Table</label>
 								<select
 									class="form-control-sm"
@@ -161,12 +168,106 @@
 								></select>
 							</div> -->
 
-							<div class="">
-								<label for="selected_days_ago">Days ago</label>
-								<select
-									class="form-control-sm"
-									id="selected_days_ago"
+								<div class="">
+									<label for="selected_days_ago"
+										>Days ago</label
+									>
+									<select
+										class="form-control-sm"
+										id="selected_days_ago"
+									>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+										<option>11</option>
+										<option>12</option>
+										<option>13</option>
+										<option>14</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<!-- 2nd col (buttons) -->
+						<div class="col-md-3">
+							<div class="row justify-content-center">
+								<div class="col mt-3">
+									<button
+										id="btn_submit_names"
+										type="submit"
+										class="btn btn-primary"
+									>
+										Submit détails
+									</button>
+								</div>
+
+								<div class="col mt-3">
+									<button
+										id="btn_delete_account"
+										type="submit"
+										class="btn btn-danger"
+									>
+										Supprimer compte
+									</button>
+								</div>
+							</div>
+
+							<div class="row mt-2 justify-content-center">
+								<div class="col my-auto">
+									<button
+										id="btn_submit_unique_names"
+										type="submit"
+										class="btn btn-primary"
+									>
+										Submit
+									</button>
+								</div>
+
+								<div class="col mt-2 my-auto">
+									<button
+										id="btn_get_user_data"
+										type="submit"
+										class="btn btn-warning"
+									>
+										User data
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- 3rd col (buttons) -->
+						<div class="col">
+							<div class="row mb-1">
+								<div
+									class="col mt-3 d-flex justify-content-center"
 								>
+									<button
+										id="btn_submit_daily_info"
+										type="submit"
+										class="btn btn-primary"
+									>
+										Show daily data
+									</button>
+								</div>
+							</div>
+							<div
+								class="col d-flex justify-content-center align-items-center pt-1"
+							>
+								<label for="selected_daily_info_days"
+									>Days ago</label
+								>
+								<select
+									class="form-control-sm ml-1"
+									id="selected_daily_info_days"
+								>
+									<option>0</option>
 									<option>1</option>
 									<option>2</option>
 									<option>3</option>
@@ -184,187 +285,108 @@
 								</select>
 							</div>
 						</div>
-					</div>
 
-					<!-- 2nd col (buttons) -->
-					<div class="col-md-3">
-						<div class="row justify-content-center">
-							<div class="col mt-3">
-								<button
-									id="btn_submit_names"
-									type="submit"
-									class="btn btn-primary"
+						<!-- CSV -->
+						<div class="col mt-3">
+							<div class="row float-right">
+								<a
+									href="#"
+									onclick="download_table_as_csv('Contaminated_people');"
+									>CSV</a
 								>
-									Submit détails
-								</button>
 							</div>
-
-							<div class="col mt-3">
-								<button
-									id="btn_delete_account"
-									type="submit"
-									class="btn btn-danger"
-								>
-									Supprimer compte
-								</button>
-							</div>
-						</div>
-
-						<div class="row mt-2 justify-content-center">
-							<div class="col my-auto">
-								<button
-									id="btn_submit_unique_names"
-									type="submit"
-									class="btn btn-primary"
-								>
-									Submit
-								</button>
-							</div>
-
-							<div class="col mt-2 my-auto">
-								<button
-									id="btn_get_user_data"
-									type="submit"
-									class="btn btn-warning"
-								>
-									User data
-								</button>
+							<div class="row float-right mt-4">
+								<a href="#" onclick="Export();">PDF</a>
 							</div>
 						</div>
 					</div>
+				</form>
+			</div>
 
-					<!-- 3rd col (buttons) -->
-					<div class="col">
-						<div class="row mb-1">
-							<div class="col mt-3 d-flex justify-content-center">
-								<button
-									id="btn_submit_daily_info"
-									type="submit"
-									class="btn btn-primary"
-								>
-									Show daily data
-								</button>
-							</div>
-						</div>
-						<div
-							class="col d-flex justify-content-center align-items-center pt-1"
-						>
-							<label for="selected_daily_info_days"
-								>Days ago</label
+			<!-- Table -->
+
+			<div
+				class="container table-responsive-lg col justify-content-md-center pb-4"
+				id="Contaminated_people"
+			>
+				<h1 id="title_tab"></h1>
+				<table class="table pb-4" id="Contaminated_people">
+					<thead id="my_table_header"></thead>
+
+					<tbody id="my_table"></tbody>
+				</table>
+			</div>
+
+			<!-- Agreement admin -->
+			<!-- Modal -->
+			<div
+				class="modal fade"
+				id="terms"
+				data-backdrop="static"
+				data-keyboard="false"
+				tabindex="-1"
+				aria-labelledby="staticBackdropLabel"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">
+								Terms of Agreement
+							</h5>
+							<button
+								type="button"
+								class="close"
+								data-dismiss="modal"
+								aria-label="Close"
 							>
-							<select
-								class="form-control-sm ml-1"
-								id="selected_daily_info_days"
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body col-md text-justify">
+							<p>
+								Par la présente, je certifie sur l'honneur
+								n'utiliser QRona et les données utilisateurs
+								relevées dans le cadre du coronavirus et non à
+								des fins personnelles ou commerciales.
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button
+								id="btn_deny"
+								type="button"
+								class="btn btn-secondary"
+								data-dismiss="modal"
 							>
-								<option>0</option>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-								<option>6</option>
-								<option>7</option>
-								<option>8</option>
-								<option>9</option>
-								<option>10</option>
-								<option>11</option>
-								<option>12</option>
-								<option>13</option>
-								<option>14</option>
-							</select>
-						</div>
-					</div>
-
-					<!-- CSV -->
-					<div class="col mt-3">
-						<div class="row float-right">
-							<a
-								href="#"
-								onclick="download_table_as_csv('Contaminated_people');"
-								>CSV</a
+								Deny
+							</button>
+							<button
+								id="btn_accept"
+								type="button"
+								class="btn btn-primary"
 							>
+								Agree
+							</button>
 						</div>
-						<div class="row float-right mt-4">
-							<a href="#" onclick="Export();">PDF</a>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-
-		<!-- Table -->
-
-		<div
-			class="container table-responsive-lg col justify-content-md-center pb-4"
-			id="Contaminated_people"
-		>
-			<h1 id="title_tab"></h1>
-			<table class="table pb-4" id="Contaminated_people">
-				<thead id="my_table_header">
-				</thead>
-
-				<tbody id="my_table"></tbody>
-			</table>
-		</div>
-
-		<!-- Agreement admin -->
-		<!-- Modal -->
-		<div
-			class="modal fade"
-			id="terms"
-			data-backdrop="static"
-			data-keyboard="false"
-			tabindex="-1"
-			aria-labelledby="staticBackdropLabel"
-			aria-hidden="true"
-		>
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">
-							Terms of Agreement
-						</h5>
-						<button
-							type="button"
-							class="close"
-							data-dismiss="modal"
-							aria-label="Close"
-						>
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body col-md text-justify">
-						<p>
-							Par la présente, je certifie sur l'honneur n'utiliser
-							QRona et les données utilisateurs relevées dans le
-							cadre du coronavirus et non à des fins personnelles
-							ou commerciales.
-						</p>
-					</div>
-					<div class="modal-footer">
-						<button
-							id="btn_deny"
-							type="button"
-							class="btn btn-secondary"
-							data-dismiss="modal"
-						>
-							Deny
-						</button>
-						<button
-							id="btn_accept"
-							type="button"
-							class="btn btn-primary"
-						>
-							Agree
-						</button>
 					</div>
 				</div>
 			</div>
-		</div>
+		</main>
 
 		<!-- Footer -->
-		<footer class="container footer text-right py-2 col-md-12 fixed-bottom">
-			<p class="text-muted m-0"><small>© 2020 Batimax </small></p>
+		<footer class="footer py-2 mt-auto">
+			<div
+				class="container row align-items-center justify-content-between"
+			>
+				<div class="ml-3">
+					<a href="mailto:qrona@satellite.bar?subject=QRona"
+						><small> Questions, remarks?</small></a
+					>
+				</div>
+				<div class="text-muted">
+					<small>©2020 Batimax</small>
+				</div>
+			</div>
 		</footer>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
