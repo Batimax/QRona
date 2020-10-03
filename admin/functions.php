@@ -139,7 +139,6 @@ function getTables($dtb)
 
 function getUserData($dtb, $user_id)
 {
-	// Get all names in database
 	$req = $dtb->prepare('SELECT * FROM users WHERE id = :user_key');
 	$req->execute(array(
 		'user_key' => $user_id,
@@ -149,7 +148,37 @@ function getUserData($dtb, $user_id)
 
 	if (!$user_data) {
 		$user_data = "no_user";
+	} else {
+		if ($user_data[0]['verification_nbr'] == 'null') {
+			$user_data[0]['verification_nbr'] = 'No';
+		} else {
+			$user_data[0]['verification_nbr'] = 'Y';
+		}
+		$req = $dtb->prepare('SELECT date_scan, user_table FROM logs
+		WHERE user = :user_key
+		ORDER BY date_scan');
+		$req->execute(array(
+			'user_key' => $user_id,
+		));
+		$user_logs = $req->fetchAll(PDO::FETCH_ASSOC);
+		$req->closeCursor();
+
+		if (!$user_logs) {
+			$logs_to_print = 'No logs';
+		} else {
+			$logs_to_print = '';
+			foreach ($user_logs as $log){
+				$logs_to_print .= $log['date_scan'] . "<br />";
+			}
+			$logs_to_print .= "</td><td>";
+			foreach ($user_logs as $log){
+				$logs_to_print .= $log['user_table'] . "<br />";
+			}
+		}
+		$user_data[0]['logs'] = $logs_to_print;
+
 	}
+	// print_r($user_data);
 	return $user_data;
 }
 
@@ -160,29 +189,24 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $days_ago)
 	$req = $dtb->prepare('	SELECT date_scan, user_table
 							FROM logs
 							WHERE user = :user_key
-							-- AND logs.user_table = :user_table
 							AND date_scan >= DATE_SUB(NOW(), INTERVAL :days_ago DAY)');
 	$req->execute(array(
 		'user_key' => $id,
 		'days_ago' => $days_ago,
-		// 'user_table' => $table
 	));
 	$scan_dates = $req->fetchAll(PDO::FETCH_ASSOC);
 	$req->closeCursor();
 
-	// print_r($scan_dates);
-
 	if (!$scan_dates) {
+		// No scan for user
 		$scan_dates = false;
 		$total_user_contaminated_infos = "no_scan_date_for_user";
-		// echo "Client not in Satellite during previous 14 days.";
 	} else {
 
 		$hour = $hour / 2;
 
 		$contaminated_user_date_scan_id = array();
 		$contaminated_user_date_scan_id[0] = 0;
-		// $scan_dates = $scan_dates[0];
 
 		foreach ($scan_dates as $date_scan_wanted_user) {
 			$table = $date_scan_wanted_user['user_table'];
@@ -227,6 +251,9 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $days_ago)
 					$contaminated_user_date_scan_id[] = $ids['id'];
 				}
 
+				$contaminated_user_infos[0]['table'] = $table;
+				print_r($contaminated_user_infos);
+
 				// Add the multiple dates of a user around the wanted date on only one array
 				if (sizeof($contaminated_user_infos) > 1) {
 					foreach ($contaminated_user_infos as $k => &$array_user) {
@@ -245,9 +272,12 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $days_ago)
 						} // Remove pointer
 						unset($array_user_child);
 					}
+
 					unset($array_user);
 					$contaminated_user_infos = array_values($contaminated_user_infos);
 				}
+					print_r($contaminated_user_infos);
+
 				// Then array with data of potentially contaminated users
 				$total_user_contaminated_infos[] = $contaminated_user_infos;
 			}

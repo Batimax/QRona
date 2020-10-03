@@ -209,14 +209,16 @@ function getUserData() {
 					var user_data = response.status[0];
 					console.log(user_data);
 					var table_header =
-						" <tr><th>Nom</th> <th>Rue</th> <th>Ville</th> <th>Telephone</th> <th>Email</th> <th>Last Scan</th></tr>";
+						" <tr><th>Nom</th> <th>Rue</th> <th>Ville</th> <th>Zipcode</th> <th>Telephone</th> <th>Verif</th> <th>Email</th> <th>Scans</th> <th>Table</th></tr>";
 
 					var name = user_data.lastname + " " + user_data.firstname;
 					var adress = user_data.adress;
 					var city = user_data.city;
+					var zipcode = user_data.zipcode;
 					var phone = user_data.phone;
+					var validated = user_data.verification_nbr;
 					var email = user_data.email;
-					var date_scan = user_data.last_connection;
+					var logs = user_data.logs;
 
 					var table_content =
 						'<tr><th class="no_colapse"> ' +
@@ -229,13 +231,19 @@ function getUserData() {
 						city +
 						"</td>" +
 						"<td> " +
+						zipcode +
+						"</td>" +
+						"<td> " +
 						phone +
+						"</td>" +
+						"<td> " +
+						validated +
 						"</td>" +
 						"<td> " +
 						email +
 						"</td>" +
 						'<td class="no_colapse" > ' +
-						date_scan +
+						logs +
 						"</td></tr>";
 
 					$("#my_table_header").html(table_header);

@@ -254,7 +254,7 @@ $(document).ready(function () {
 						var table_content, table_header;
 						table_content = "";
 						table_header =
-							" <tr><th>Nom</th> <th>Rue</th> <th>Zipcode</th> <th>Ville</th> <th>Telephone</th> <th>Email</th> <th>Table</th></tr>";
+							" <tr><th>Nom</th> <th>Rue</th> <th>Zipcode</th> <th>Ville</th> <th>Telephone</th> <th>Email</th></tr>";
 
 						user_contaminated_infos.forEach(myFunction);
 
@@ -275,7 +275,6 @@ $(document).ready(function () {
 									var city = children_value.city;
 									var phone = children_value.phone;
 									var email = children_value.email;
-									var table = children_value.table;
 
 									var line =
 										"<tr><td>" +
@@ -295,9 +294,6 @@ $(document).ready(function () {
 										"</td>" +
 										"<td> " +
 										email +
-										"</td>" +
-										"<td> " +
-										table +
 										"</td></tr>";
 
 									table_content = table_content + line;
