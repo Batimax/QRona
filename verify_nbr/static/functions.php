@@ -9,8 +9,8 @@ function sendSMS($dtb, $userID, $phone_number) {
 	// generate rdm number
 	$verif_code = rand(100000, 999999);
 
-		// $status_api = APIsms($verif_code, $phone_number);
-		$status_api = 'sucscess';
+		$status_api = APIsms($verif_code, $phone_number);
+		// $status_api = 'success';
 		// If sms correctly sent
 		if ($status_api == 'success'){
 			storeRdmNbrDB($dtb, $verif_code, $userID);

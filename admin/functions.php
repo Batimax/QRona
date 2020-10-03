@@ -83,6 +83,21 @@ function getUserNames($dtb)
 	return $users_name;
 }
 
+function getAllUsersCity($dtb)
+{
+	// Get all names in database
+	$req = $dtb->prepare('SELECT city,id FROM users');
+	$req->execute(array());
+	$users_city = $req->fetchAll(PDO::FETCH_ASSOC);
+	$req->closeCursor();
+
+	if (!$users_city) {
+		$users_city = false;
+	}
+
+	return $users_city;
+}
+
 function getTables($dtb)
 {
 	// Get all different tables
