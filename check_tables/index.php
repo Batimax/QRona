@@ -54,6 +54,7 @@ include("functions.php");
 							<tr>
 								<th>Table</th>
 								<th>Nom</th>
+								<th>Verifié</th>
 								<th>Heure Scan</th>
 							</tr>
 						</thead>
@@ -66,7 +67,7 @@ include("functions.php");
 
 						foreach ($all_tables as $table) {
 
-							$req = $dtb->prepare("SELECT users.lastname, users.firstname, DATE_FORMAT(logs.date_scan,'%H:%i') AS date_scan
+							$req = $dtb->prepare("SELECT users.lastname, users.firstname, users.nbr_verified, users.mail_verified, DATE_FORMAT(logs.date_scan,'%H:%i') AS date_scan
 							FROM users
 							INNER JOIN logs
 							ON logs.user = users.id
@@ -85,13 +86,29 @@ include("functions.php");
 							if (!$data_users) {
 								// Nobody at the table
 								$data_users = false;
-								echo '<td> - </td><td> - </td></tr>';
+								echo '<td> - </td><td> - </td><td> - </td></tr>';
 							} else {
 							}
 							if ($data_users) {
+								// Check if verified mail or number
+
+
 								echo '<td>';
 								foreach ($data_users as $data_user) {
 									echo $data_user["lastname"] . ' ' . $data_user["firstname"] . '<br />';
+								}
+								echo '</td><td>';
+
+								foreach ($data_users as $data_user) {
+
+									if ($data_user["nbr_verified"] == 1 OR $data_user["mail_verified"]){
+										$data_user["verified"] = 'OK';
+									} else {
+										$data_user["verified"] = 'No';
+
+									};
+
+									echo $data_user["verified"] . '<br />';
 								}
 								echo '</td><td>';
 
