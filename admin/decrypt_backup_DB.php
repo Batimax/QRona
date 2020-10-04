@@ -2,8 +2,13 @@
 require_once __DIR__.'/init.php';
 
 //folder location change to suit
-// $folder= getenv("DOCUMENT_ROOT").'/backup/QRona/db_dumps/';
-$folder='/backup/QRona/db_dumps/';
+$ENVIRONMENT = decryptEncryptedEnv('ENVIRONMENT');
+
+if ($ENVIRONMENT == 'prod_env') {
+	$folder='/backup/QRona/db_dumps/';
+} else {
+	$folder = getenv("DOCUMENT_ROOT") . '/db_dumps/';
+}
 
 $halt='1';
 //retrieve the data from the URL

@@ -252,7 +252,6 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $days_ago)
 				}
 
 				$contaminated_user_infos[0]['table'] = $table;
-				print_r($contaminated_user_infos);
 
 				// Add the multiple dates of a user around the wanted date on only one array
 				if (sizeof($contaminated_user_infos) > 1) {
@@ -276,7 +275,6 @@ function getUsersContaminatedFromID($dtb, $id, $hour, $days_ago)
 					unset($array_user);
 					$contaminated_user_infos = array_values($contaminated_user_infos);
 				}
-					print_r($contaminated_user_infos);
 
 				// Then array with data of potentially contaminated users
 				$total_user_contaminated_infos[] = $contaminated_user_infos;

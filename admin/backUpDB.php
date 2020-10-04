@@ -1,7 +1,6 @@
 <?php
 // https://www.portaltechnologies.uk/mysql-database-backup-encryption-and-decryption/
 //configuration
-
 function genDBBackup () {
 	require_once __DIR__.'/init.php';
 
@@ -9,18 +8,21 @@ function genDBBackup () {
 	$ENVIRONMENT = decryptEncryptedEnv('ENVIRONMENT');
 
 	// $folder = '/srv/data/nextcloud/mcurvat/files/export';
-	$folder = getenv("DOCUMENT_ROOT") . '/db_dumps/'; // change the folder name to suit
 	$d = date('dmy');
 	$halt = '1';
 	//Your database details
 	if ($ENVIRONMENT == 'prod_env') {
-		$dbusername = decryptEncryptedEnv('DATABASE_USE');
+		$dbusername = decryptEncryptedEnv('DATABASE_USER');
 		$dbpassword = decryptEncryptedEnv('DATABASE_PASSWORD');
 		$msqldump_path = 'mysqldump';
+		$folder = '/backup/QRona/db_dumps/';
+
 	} else {
 		$dbusername = 'root';
 		$dbpassword = '\'root\'';
 		$msqldump_path = '/Applications/MAMP/Library/bin/mysqldump';
+		$folder = getenv("DOCUMENT_ROOT") . '/db_dumps/'; // change the folder name to suit
+
 	}
 	$dbname = 'QRona';
 	$dbhost = 'localhost';

@@ -109,6 +109,7 @@ function checkMailExist($email, $dtb)
 
 function createNewAccount($userID, $firstname, $lastname, $address, $city, $zipcode, $email, $dtb)
 {
+	print_r($dtb);
 	// Put new user in db
 	$req = $dtb->prepare('INSERT INTO users(userID, firstname, lastname, adress, city, zipcode, email, last_connection) VALUES(:userID, :firstname, :lastname, :adress, :city, :zipcode, :email, NOW())');
 	$req->execute(array(

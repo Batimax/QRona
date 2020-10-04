@@ -190,7 +190,7 @@ function createNewUser(user_table) {
 						var userID = response.status;
 						// Relative path
 						var url =
-							"verify_nbr/index.html?userID=" +
+							"https://satellite.bar/qr/verify_nbr/index.html?userID=" +
 							userID +
 							"&table=" +
 							user_table;

@@ -12,7 +12,7 @@ $ENVIRONMENT = decryptEncryptedEnv($env_ENV);
 
 if ($ENVIRONMENT == 'prod_env') {
 
-	$DATABASE_USER = decryptEncryptedEnv('DATABASE_USE');
+	$DATABASE_USER = decryptEncryptedEnv('DATABASE_USER');
 	$DATABASE_PASSWORD = decryptEncryptedEnv('DATABASE_PASSWORD');
 
 	try {
