@@ -25,6 +25,12 @@ include("functions.php");
 			footer a{
 				color: hotpink;
 			}
+			#not_okay{
+				color: red;
+			}
+			#okay{
+				color: green;
+			}
 		</style>
 	</head>
 
@@ -88,11 +94,7 @@ include("functions.php");
 								$data_users = false;
 								echo '<td> - </td><td> - </td><td> - </td></tr>';
 							} else {
-							}
-							if ($data_users) {
 								// Check if verified mail or number
-
-
 								echo '<td>';
 								foreach ($data_users as $data_user) {
 									echo $data_user["lastname"] . ' ' . $data_user["firstname"] . '<br />';
@@ -102,10 +104,9 @@ include("functions.php");
 								foreach ($data_users as $data_user) {
 
 									if ($data_user["nbr_verified"] == 1 OR $data_user["mail_verified"]){
-										$data_user["verified"] = 'OK';
+										$data_user["verified"] = '<span id="okay">OK</span>';
 									} else {
-										$data_user["verified"] = 'No';
-
+										$data_user["verified"] = '<span id="not_okay">No</span>';
 									};
 
 									echo $data_user["verified"] . '<br />';

@@ -33,6 +33,12 @@ include("functions.php");
 		main a:hover {
 			color: black;
 		}
+		#not_okay{
+				color: red;
+		}
+		#okay{
+			color: green;
+		}
 	</style>
 </head>
 
@@ -68,13 +74,14 @@ include("functions.php");
 						<!-- En-tête du tableau -->
 						<tr>
 							<th>Nom</th>
+							<th>Verifié</th>
 							<th>Heure Scan</th>
 						</tr>
 					</thead>
 
 					<?php
 
-						$req = $dtb->prepare("SELECT users.lastname, users.firstname, DATE_FORMAT(logs.date_scan,'%H:%i') AS date_scan
+						$req = $dtb->prepare("SELECT users.lastname, users.firstname, users.nbr_verified, users.mail_verified, DATE_FORMAT(logs.date_scan,'%H:%i') AS date_scan
 						FROM users
 						INNER JOIN logs
 						ON logs.user = users.id
@@ -95,11 +102,22 @@ include("functions.php");
 							$data_users = false;
 							echo '<td> - </td><td> - </td></tr>';
 						} else {
-						}
-						if ($data_users) {
+
 							echo '<td>';
 							foreach ($data_users as $data_user) {
 								echo $data_user["lastname"] . ' ' . $data_user["firstname"] . '<br />';
+							}
+							echo '</td><td>';
+
+							foreach ($data_users as $data_user) {
+
+								if ($data_user["nbr_verified"] == 1 OR $data_user["mail_verified"]){
+									$data_user["verified"] = '<span id="okay">OK</span>';
+								} else {
+									$data_user["verified"] = '<span id="not_okay">No</span>';
+								};
+
+								echo $data_user["verified"] . '<br />';
 							}
 							echo '</td><td>';
 
