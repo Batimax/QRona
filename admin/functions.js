@@ -216,7 +216,7 @@ function getUserData() {
 					var city = user_data.city;
 					var zipcode = user_data.zipcode;
 					var phone = user_data.phone;
-					var validated = user_data.verification_nbr;
+					var validated = user_data.nbr_verified;
 					var email = user_data.email;
 					var logs = user_data.logs;
 

@@ -32,26 +32,6 @@ $(document).ready(function () {
 			},
 		});
 
-		// Get all tables from db
-		// $.ajax({
-		// 	url: "api.php",
-		// 	type: "post",
-		// 	dataType: "json",
-		// 	data: {
-		// 		action: "get_tables",
-		// 	},
-		// 	success: function (response) {
-		// 		console.log(response);
-		// 		var list_tables = response.status;
-		// 		list_tables.forEach(myFunction);
-
-		// 		function myFunction(value) {
-		// 			console.log(value);
-		// 			$("#selected_table").append(new Option(value));
-		// 		}
-		// 	},
-		// });
-
 		// DELETE user in db
 		$("#btn_delete_account").on("click", function (e) {
 			e.preventDefault();

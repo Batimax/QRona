@@ -149,10 +149,10 @@ function getUserData($dtb, $user_id)
 	if (!$user_data) {
 		$user_data = "no_user";
 	} else {
-		if ($user_data[0]['verification_nbr'] == 'null') {
-			$user_data[0]['verification_nbr'] = 'No';
+		if ($user_data[0]['nbr_verified'] == 0) {
+			$user_data[0]['nbr_verified'] = 'No';
 		} else {
-			$user_data[0]['verification_nbr'] = 'Y';
+			$user_data[0]['nbr_verified'] = 'Yes';
 		}
 		$req = $dtb->prepare('SELECT date_scan, user_table FROM logs
 		WHERE user = :user_key
