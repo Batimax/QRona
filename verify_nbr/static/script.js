@@ -20,59 +20,62 @@ $(document).ready(function () {
 	$("#send_sms").on("click", function (e) {
 		e.preventDefault();
 
-		if (validate_form()) {
-			var phone = $("#phone").val().trim();
+		var phone = $("#phone").val().trim();
 
-			phone = formatePhoneNumber(phone);
+		phone = formatePhoneNumber(phone);
 
-			if (phone === false) {
-				$("#phone").removeClass("is-valid");
-				$("#phone").addClass("is-invalid");
-			} else if (phone === "INVALID_COUNTRY") {
-				$("#phone").addClass("is-invalid");
-				$("#error_unauthorized_country").fadeIn();
-			} else {
-				console.log(phone);
+		if (phone === false) {
+			$("#phone").removeClass("is-valid");
+			$("#phone").addClass("is-invalid");
+		} else if (phone === "INVALID_COUNTRY") {
+			$("#phone").addClass("is-invalid");
+			$("#error_unauthorized_country").fadeIn();
+		} else if (phone === "NOT_A_NUMBER") {
+			$("#phone").addClass("is-invalid");
+			$("#error_nbr_not_valid").fadeIn();
+		} else {
+			$("#phone").removeClass("is-invalid");
+			$("#phone").addClass("is-valid");
+			console.log(phone);
 
-				sessionStorage.setItem("phone_number", phone);
+			sessionStorage.setItem("phone_number", phone);
 
-				console.log("Sending SMS...");
-				$.ajax({
-					url: "static/api.php",
-					type: "post",
-					data: {
-						action: "send_sms",
-						phone: phone,
-						userID: userID,
-					},
-					success: function (response) {
-						console.log(response);
-						if (response.status == "success_sms") {
-							console.log("SMS sent!");
-							// Set Timeout for sendSMS buttons
-							smsTimeOut();
+			console.log("Sending SMS...");
+			$.ajax({
+				url: "static/api.php",
+				type: "post",
+				data: {
+					action: "send_sms",
+					phone: phone,
+					userID: userID,
+				},
+				success: function (response) {
+					console.log(response);
+					if (response.status == "success_sms") {
+						console.log("SMS sent!");
+						// Set Timeout for sendSMS buttons
+						smsTimeOut();
 
-							waitForCode();
-						} else if (response.error == "twilio_phone_not_valid") {
-							console.log("Not valid phone for the API!");
-							$("#phone").addClass("is-invalid");
-							$("#error_nbr_not_valid").show();
-						} else if (
-							response.error == "twilio_unauthorized_country"
-						) {
-							console.log("Not authorized country code for API!");
-							$("#phone").addClass("is-invalid");
-							$("#error_unauthorized_country").fadeIn();
-						} else {
-							console.log("An error occured with the API!");
-							$("#error_occured").show();
-						}
-					},
-					error: function (response) {
-						console.log(response);
-					},
-				});
-			}
+						waitForCode();
+					} else if (response.error == "twilio_phone_not_valid") {
+						console.log("Not valid phone for the API!");
+						$("#phone").addClass("is-invalid");
+						$("#error_nbr_not_valid").show();
+					} else if (
+						response.error == "twilio_unauthorized_country"
+					) {
+						console.log("Not authorized country code for API!");
+						$("#phone").addClass("is-invalid");
+						$("#error_unauthorized_country").fadeIn();
+					} else {
+						console.log("An error occured with the API!");
+						$("#error_occured").show();
+					}
+				},
+				error: function (response) {
+					console.log(response);
+				},
+			});
 		}
 	});
 
