@@ -100,7 +100,7 @@ include("functions.php");
 						if (!$data_users) {
 							// Nobody at the table
 							$data_users = false;
-							echo '<td> - </td><td> - </td></tr>';
+							echo '<td> - </td><td> - </td><td> - </td></tr>';
 						} else {
 
 							echo '<td>';
