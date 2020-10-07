@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	console.log("document ready")
+	console.log("document ready");
 	// Hide containers
 	hideContainers();
 
@@ -52,11 +52,16 @@ $(document).ready(function () {
 				} else if (response.error == "nbr_not_verified") {
 					console.log("Phone number not verified!");
 					var url =
-						// "http://localhost:8888/Satellite/QRona/verify_nbr/index.html?userID=" +
-						"https://satellite.bar/qr/verify_nbr/index.html?userID=" +
+						"verify_nbr/index.html?table=" +
 						userID +
 						"&table=" +
 						user_table;
+					// var url =
+					// 	// "http://localhost:8888/Satellite/QRona/verify_nbr/index.html?userID=" +
+					// 	"https://satellite.bar/qr/verify_nbr/index.html?userID=" +
+					// 	userID +
+					// 	"&table=" +
+					// 	user_table;
 					window.location.replace(url);
 				}
 			},
