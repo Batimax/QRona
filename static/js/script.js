@@ -52,7 +52,7 @@ $(document).ready(function () {
 				} else if (response.error == "nbr_not_verified") {
 					console.log("Phone number not verified!");
 					var url =
-						"verify_nbr/index.html?table=" +
+						"verify_nbr/index.html?userID=" +
 						userID +
 						"&table=" +
 						user_table;
